@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pagina1"
+        android:title="Ejemplo 1"
+        />
+    <item
+        android:id="@+id/pagina2"
+        android:title="Ejemplo 2"
+        />
+    <item
+        android:id="@+id/pagina3"
+        android:title="Ejemplo 3"
+        />
+    <item
+        android:id="@+id/pagina4"
+        android:title="Ejemplo 4"
+        />
+    <item
+        android:id="@+id/pagina5"
+        android:title="Ejemplo 5"
+        />
+</menu>
