@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,11 +12,76 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+    int webViewId = Integer.MIN_VALUE;
+    WebView browser;
 
-    String pagina1 = "<html> " +
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LinearLayout layout = new LinearLayout(this);
+        browser = new WebView(this);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+
+        Toolbar toolbar = new Toolbar(this);
+        toolbar.setId(View.generateViewId());
+        toolbar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100));
+        toolbar.setBackgroundColor(Color.rgb(0,120,255));
+        layout.addView(toolbar);
+        setSupportActionBar(toolbar);
+
+        layout.setLayoutParams(layoutParams);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        browser.setLayoutParams(layoutParams);
+        browser.setWebChromeClient(new WebChromeClient());
+        browser.getSettings().setJavaScriptEnabled(true);
+        browser.setTranslationX(0);
+        browser.setTranslationY(0);
+        browser.loadData("<html style=\"background-color:blue\"></html>","text/html", "UTF-8");
+        layout.addView(browser);
+        setContentView(layout);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if (id == R.id.pagina1)
+            browser.loadData(pagina1_1encoded, "text/html", "base64");
+        else if (id == R.id.pagina2)
+            browser.loadData(pagina1_2encoded, "text/html", "base64");
+        else if (id == R.id.pagina3)
+            browser.loadData(pagina1_3encoded, "text/html", "base64");
+        else if (id == R.id.pagina4)
+            browser.loadData(pagina1_4encoded, "text/html", "base64");
+        else if (id == R.id.pagina5)
+            browser.loadData(pagina1_5encoded, "text/html", "base64");
+        else if (id == R.id.p2_1)
+            browser.loadData(pagina2_1encoded, "text/html", "base64");
+        else if (id == R.id.p2_2)
+            browser.loadData(pagina2_2encoded, "text/html", "base64");
+        else if (id == R.id.p2_3)
+            browser.loadData(pagina2_3encoded, "text/html", "base64");
+        else
+            return super.onOptionsItemSelected(item);
+        return true;
+    }
+
+    String pagina1_1 = "<html> " +
             "<body> " +
             "<div name=\"capa1\" id=\"capa1\" style=\"position:absolute;top:-1000;left:-1000;\"> " +
             "<b style=\"background-color:black; color:white;\"> &nbsp; &nbsp; Hola Amigo &nbsp; &nbsp; </b> " +
@@ -62,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             "</body> </html>";
 
     //SinWebMovil
-    String pagina2 =
+    String pagina1_2 =
             "<html> <head> <title> Dividir en una AppWeb Cliente </title> </head> " +
                     "<body> <hr> " +
                     "<form name=\"scr\" style=\"text-align:center; background-color:yellow\"> <br> " +
@@ -81,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     "</html>";
 
     //ConWebMovil
-    String pagina3 =
+    String pagina1_3 =
             "<html> <head> <title> Dividir en una AppWeb Cliente </title> " +
                     "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/> </head> " +
                     "<body style=\"@media only screen and (min-device-width : 120px) and (max-device-width : 120px) { margin:0.5cm; }\"> <hr> " +
@@ -100,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                     "</body> " +
                     "</html>";
 
-    String pagina4 =
+    String pagina1_4 =
             "<html> <body> " +
                     "<div id=\"capa1\"> &nbsp; </div> <br> " +
                     "<form name=\"f1\"> " +
@@ -135,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     "</body> </html>";
 
     //Herencia
-    String pagina5 =
+    String pagina1_5 =
             "<html> <head> <title> Hola JSON </title> " +
                     "<script language=\"JavaScript\"> " +
                     "class suma { " +
@@ -181,61 +247,132 @@ public class MainActivity extends AppCompatActivity {
                     "</body> " +
                     "</html>";
 
-    int webViewId = Integer.MIN_VALUE;
-    WebView browser;
+    String pagina2_1 = "<html> <head> <title> NumMayor en una AppWeb Cliente </title> " +
+            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/> </head> " +
+            "<body style=\"@media only screen and (min-device-width : 120px) " +
+            "and (max-device-width : 120px) { margin:0.5cm; }\"> <hr> " +
+            "<form name=\"scr\" style=\"text-align:center; background-color:pink;\"> <br> " +
+            "<b> Valor de A: </b> &nbsp; <input type=\"text\" name=\"t1\"> </input> <br><br> " +
+            "<b> Valor de B: </b> &nbsp; <input type=\"text\" name=\"t2\"> </input> <br> <br> " +
+            "<input type=\"text\" readonly name=\"res\" value=\"Resultado:\" style=\"width:100%;\"> </input> <br> <br> " +
+            "<input type=\"button\" name=\"b1\" onclick=\"mostrar()\" value=\"Aceptar\"> </input> <br> &nbsp; " +
+            "</form> " +
+            "<script language=\"JavaScript\"> " +
+            "function mostrar() { " +
+            "var RES = \"Error\" ; " +
+            "var a = scr.t1.value / 1.0 ; " +
+            "var b = scr.t2.value / 1.0 ; " +
+            "if(a>b) { " +
+            "RES=\"A es mayor\"; " +
+            "} " +
+            "if(a<b) { " +
+            "RES=\"B es mayor\"; " +
+            "} " +
+            "if(a==b) { " +
+            "RES=\"A y B son iguales\"; " +
+            "} " +
+            "scr.res.value = (\"Resultado: \" + ( RES ) + \" \" ); " +
+            "} " +
+            "</script> " +
+            "<hr> <br> " +
+            "<form name=\"f2\" style=\"text-align:center;; background-color:silver;\"> " +
+            "<hr> " +
+            "<select name=\"r1\"> " +
+            "<option name=\"r1\" value=\"white\"> Blanco </option> " +
+            "<option selected name=\"r1\" value=\"black\"> Negro </option> " +
+            "<option name=\"r1\" value=\"red\"> Rojo </option> " +
+            "</select> " +
+            "<hr> " +
+            "<input type=\"button\" name=\"b1\" onclick=\"scr.style.backgroundColor=f2.r1.value; " +
+            "alert('0k: ' + f2.r1.value);\" value=\"Configurar\"> </input> " +
+            "<br> &nbsp; " +
+            "</form> " +
+            "<br> " +
+            "<hr> " +
+            "</body> </html>";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    String pagina2_2 = "<html> <head> <title> NumMayor en una AppWeb Cliente </title> " +
+            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/> </head> " +
+            "<body style=\"@media only screen and (min-device-width : 120px) " +
+            "and (max-device-width : 120px) { margin:0.5cm; }\"> <hr> " +
+            "<form name=\"scr\" style=\"text-align:center;; background-color:pink;\"> <br> " +
+            "<b> Valor de A: </b> &nbsp; <input type=\"text\" name=\"t1\"> </input> <br><br> " +
+            "<b> Valor de B: </b> &nbsp; <input type=\"text\" name=\"t2\"> </input> <br> <br> " +
+            "<input type=\"text\" readonly name=\"res\" value=\"Resultado:\" style=\"width:100%;\"> </input> <br> <br> " +
+            "<input type=\"button\" name=\"b1\" onclick=\"mostrar()\" value=\"Aceptar\"> </input> <br> &nbsp; " +
+            "</form> " +
+            "<script language=\"JavaScript\"> " +
+            "function mostrar() { " +
+            "var RES = \"Error\" ; " +
+            "var a = scr.t1.value / 1.0 ; " +
+            "var b = scr.t2.value / 1.0 ; " +
+            "if(a>b) { " +
+            "RES=\"A es mayor\"; " +
+            "} " +
+            "if(a<b) { " +
+            "RES=\"B es mayor\"; " +
+            "} " +
+            "if(a==b) { " +
+            "RES=\"A y B son iguales\"; " +
+            "} " +
+            "scr.res.value = (\"Resultado: \" + ( RES ) + \" \" ); " +
+            "} " +
+            "</script> " +
+            "<hr> <br> " +
+            "<form name=\"f2\" style=\"text-align:center;; background-color:silver;\"> " +
+            "<hr> " +
+            "<input type=\"radio\" checked name=\"r1\" value=\"white\"> Blanco </input> " +
+            "<input type=\"radio\" name=\"r1\" value=\"black\"> Negro </input> " +
+            "<input type=\"radio\" name=\"r1\" value=\"red\"> Rojo </input> " +
+            "<hr> <br> " +
+            "<input type=\"button\" name=\"b1\" " +
+            "onclick=\"scr.style.backgroundColor=f2.r1.value; if(f2.r1[1].checked) { alert('Negro'); }\" " +
+            "value=\"Configurar\"> </input> " +
+            "<br> &nbsp; " +
+            "</form> " +
+            "<br> " +
+            "<hr> " +
+            "</body> </html>";
 
-        LinearLayout layout = new LinearLayout(this);
-        browser = new WebView(this);
+    String pagina2_3 = "<html>\n" +
+            "    <head>\n" +
+            "        <style type=\"text/css\"> body { } form { background-color:yellow; width:200px; height:200px; } </style>\n" +
+            "    </head>\n" +
+            "    <body>\n" +
+            "        <br> <br> <button onclick=\"saludo();\" style=\"background-color:#aaffaa;\"> Aceptar </button> <br> <button onclick=\"f1.style.top=100;f1.style.left=100;\" style=\"background-color:#aaffaa;\"> Mostrar Ventana </button> <br> <script> function operacion() { f1.a1.value=f1.a1.value+'\\nDivision: ' + (f1.t1.value/f1.t2.value) + ''; if(f1.ch1.checked){ f1.a1.value=f1.a1.value+'\\nResta: ' + (f1.t1.value - f1.t2.value) + ''; } } </script> \n" +
+            "        <form name=\"f1\" id=\"f1\" style=\"background-color:pink; border:double; width:300px; height:250px; position:absolute; left:150px; top:100px; \">\n" +
+            "            <i style=\"width:300px; background-color:blue;color:white;\" onclick=\"f1.style.top=-10000;f1.style.left=-10000;\" > Cerrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> \n" +
+            "            <hr>\n" +
+            "            <b> X: </b> <input type=\"text\" name=\"t1\"> </input> <br> <b> Y: </b> <input type=\"text\" name=\"t2\"> </input> <br><br><input type=\"checkbox\" name=\"ch1\"> Calcular Resta Y Divisi&oacute;n</input> <br><input type=\"checkbox\" name=\"ch2\"> Saludar</input> <br> \n" +
+            "            <textarea name=\"a1\" style=\"background-color:#ddffff; border: double ; width:100px;height:50px;\"> &nbsp </textarea>\n" +
+            "            <br><br>&nbsp;<input type=\"button\" value=\" Aceptar \" style=\"background-color:#aaffaa;\" onclick=\"operacion();\"> </input> <br> &nbsp; <br> &nbsp; <br> &nbsp; \n" +
+            "        </form>\n" +
+            "        <br> \n" +
+            "        <form name=\"f2\" style=\"text-align:center; background-color:silver\">\n" +
+            "            <hr>\n" +
+            "            <br> &nbsp; <input type=\"radio\" name=\"r1\" value=\"white\"> Blanco </input> <br> <input type=\"radio\" checked name=\"r1\" value=\"black\"> Negro </input> <br> <input type=\"radio\" name=\"r1\" value=\"red\"> Rojo </input> <br> &nbsp; <br> <input type=\"button\" value=\"Aceptar\" onclick=\"f1.style.backgroundColor=f2.r1.value; if (f2.r1[1].checked) { alert(''+f2.r1[1].value); } \" > </input> <br> &nbsp; <br> &nbsp; <br> &nbsp; <br> &nbsp; <br> &nbsp; \n" +
+            "        </form>\n" +
+            "        <script> function saludo() { if(f1.ch2.checked){alert('Buenos Dias');} } </script> \n" +
+            "        <form name=\"f3\" style=\"text-align:center; background-color:#ddddff\">\n" +
+            "            <hr>\n" +
+            "            <br> Elegir el color: &nbsp; \n" +
+            "            <select name=\"combo1\">\n" +
+            "                <option name=\"combo1\" value=\"white\"> Blanco </option>\n" +
+            "                <option name=\"combo1\" selected value=\"black\"> Negro </option>\n" +
+            "                <option name=\"combo1\" value=\"red\"> Rojo </option>\n" +
+            "                <option name=\"combo1\" value=\"#aaffff\"> Cyan </option>\n" +
+            "            </select>\n" +
+            "            <br> &nbsp; <br> <input type=\"button\" value=\"Cambiar\" onclick=\"f1.style.backgroundColor=f3.combo1.value; alert(''+f3.combo1.value);\"> </input> <br> &nbsp; <br> &nbsp; <br> &nbsp; <br> &nbsp; \n" +
+            "        </form>\n" +
+            "    </body>\n" +
+            "</html>";
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
-
-        Toolbar toolbar = new Toolbar(this);
-        toolbar.setId(View.generateViewId());
-        toolbar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100));
-        toolbar.setBackgroundColor(Color.rgb(0,120,255));
-        layout.addView(toolbar);
-        setSupportActionBar(toolbar);
-
-        layout.setLayoutParams(layoutParams);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        browser.setLayoutParams(layoutParams);
-        browser.setWebChromeClient(new WebChromeClient());
-        browser.getSettings().setJavaScriptEnabled(true);
-        browser.setTranslationX(0);
-        browser.setTranslationY(0);
-        browser.loadData("<html style=\"background-color:blue\"></html>","text/html", "UTF-8");
-        layout.addView(browser);
-        setContentView(layout);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if (id == R.id.pagina1)
-            browser.loadData(pagina1, "text/html", "UTF-8");
-        else if (id == R.id.pagina2)
-            browser.loadData(pagina2, "text/html", "UTF-8");
-        else if (id == R.id.pagina3)
-            browser.loadData(pagina3, "text/html", "UTF-8");
-        else if (id == R.id.pagina4)
-            browser.loadData(pagina4, "text/html", "UTF-8");
-        else if (id == R.id.pagina5)
-            browser.loadData(pagina5, "text/html", "UTF-8");
-        else
-            return super.onOptionsItemSelected(item);
-        return true;
-    }
+    String pagina1_1encoded = Base64.encodeToString(pagina1_1.getBytes(), Base64.NO_PADDING);
+    String pagina1_2encoded = Base64.encodeToString(pagina1_2.getBytes(), Base64.NO_PADDING);
+    String pagina1_3encoded = Base64.encodeToString(pagina1_3.getBytes(), Base64.NO_PADDING);
+    String pagina1_4encoded = Base64.encodeToString(pagina1_4.getBytes(), Base64.NO_PADDING);
+    String pagina1_5encoded = Base64.encodeToString(pagina1_5.getBytes(), Base64.NO_PADDING);
+    String pagina2_1encoded = Base64.encodeToString(pagina2_1.getBytes(), Base64.NO_PADDING);
+    String pagina2_2encoded = Base64.encodeToString(pagina2_2.getBytes(), Base64.NO_PADDING);
+    String pagina2_3encoded = Base64.encodeToString(pagina2_3.getBytes(), Base64.NO_PADDING);
 }

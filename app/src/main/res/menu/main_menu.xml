@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/pagina1"
-        android:title="Ejemplo 1"
-        />
+        android:id="@+id/parte1"
+        android:title="Practica 9: Parte 1">
+        <menu>
+            <item
+                android:id="@+id/pagina1"
+                android:title="Ejemplo 1"
+                />
+            <item
+                android:id="@+id/pagina2"
+                android:title="Ejemplo 2"
+                />
+            <item
+                android:id="@+id/pagina3"
+                android:title="Ejemplo 3"
+                />
+            <item
+                android:id="@+id/pagina4"
+                android:title="Ejemplo 4"
+                />
+            <item
+                android:id="@+id/pagina5"
+                android:title="Ejemplo 5"
+                />
+        </menu>
+    </item>
+
     <item
-        android:id="@+id/pagina2"
-        android:title="Ejemplo 2"
-        />
-    <item
-        android:id="@+id/pagina3"
-        android:title="Ejemplo 3"
-        />
-    <item
-        android:id="@+id/pagina4"
-        android:title="Ejemplo 4"
-        />
-    <item
-        android:id="@+id/pagina5"
-        android:title="Ejemplo 5"
-        />
+        android:id="@+id/parte2"
+        android:title="Practica 9: Parte 2">
+        <menu>
+            <item
+                android:id="@+id/p2_1"
+                android:title="Pagina 1: Option select"/>
+            <item
+                android:id="@+id/p2_2"
+                android:title="Pagina 2: Radio option"/>
+            <item
+                android:id="@+id/p2_3"
+                android:title="Pagina 3: Formulario"/>
+        </menu>
+    </item>
 </menu>
