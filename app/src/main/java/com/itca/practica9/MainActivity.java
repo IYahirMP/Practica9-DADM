@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
             browser.loadData(pagina2_2encoded, "text/html", "base64");
         else if (id == R.id.p2_3)
             browser.loadData(pagina2_3encoded, "text/html", "base64");
+        else if (id == R.id.p4_1)
+            browser.loadData(pagina4_1encoded, "text/html", "base64");
+        else if (id == R.id.p4_2)
+            browser.loadData(pagina4_2encoded, "text/html", "base64");
         else
             return super.onOptionsItemSelected(item);
         return true;
@@ -367,6 +371,117 @@ public class MainActivity extends AppCompatActivity {
             "    </body>\n" +
             "</html>";
 
+    String pagina4_1 = "<html>\n" +
+            "    <body>\n" +
+            "        <center>\n" +
+            "            <form name=\"f1\">\n" +
+            "                <br>\n" +
+            "                <br>\n" +
+            "                <select name=\"s1\">\n" +
+            "                    <option name=\"s1\" value=\"pink\"> Rosita </option>\n" +
+            "                    <option name=\"s1\" value=\"yellow\"> Amarillo </option>\n" +
+            "                    <option name=\"s1\" value=\"red\"> Rojo </option>\n" +
+            "                    <option name=\"s1\" value=\"purple\"> P&uacute;rpura </option>\n" +
+            "                    <option name=\"s1\" value=\"cyan\"> Cyan </option>\n" +
+            "                </select>\n" +
+            "                <br>\n" +
+            "                <br>\n" +
+            "                <input type=\"button\" onclick=\"cambiar();\" value=\"Cambiar Color\"> </input>\n" +
+            "                <br>\n" +
+            "                <br>\n" +
+            "            </form>\n" +
+            "            <script language=\"JavaScript\">\n" +
+            "                function cambiar() {\n" +
+            "                    f1.style.background = \"\" + f1.s1.value + \"\" ;\n" +
+            "                }\n" +
+            "            </script>\n" +
+            "        </center>\n" +
+            "    </body> \n" +
+            "</html>";
+    String pagina4_2 = "<html>\n" +
+            "   <head>\n" +
+            "      <title> Manejo de Controles Web </title>\n" +
+            "      <script language=\"JavaScript\">\n" +
+            "         function verificar() {\n" +
+            "            var opcion = 0;\n" +
+            "            var opcion2 = 0;\n" +
+            "            for (var i = 0; i < f2.r1.length; i = i + 1) {\n" +
+            "                if (f2.r1[i].checked) {\n" +
+            "                    opcion = i;\n" +
+            "                    break;\n" +
+            "                }\n" +
+            "            }\n" +
+            "            for (var i = 0; i < f2.r2.length; i = i + 1) {\n" +
+            "                if (f2.r2[i].checked) {\n" +
+            "                    opcion2 = i;\n" +
+            "                    break;\n" +
+            "                }\n" +
+            "            }\n" +
+            "            if (f2.ch3.checked) {\n" +
+            "                t1.style.textDecoration = \"underline\";\n" +
+            "            } else {\n" +
+            "                t1.style.textDecoration = \"none\";\n" +
+            "            }\n" +
+            "            if (f2.ch2.checked) {\n" +
+            "                t1.style.fontStyle = \"italic\";\n" +
+            "            } else {\n" +
+            "                t1.style.fontStyle = \"normal\";\n" +
+            "            }\n" +
+            "            if (f2.ch1.checked) {\n" +
+            "                t1.style.fontWeight = \"bold\";\n" +
+            "            } else {\n" +
+            "                t1.style.fontWeight = \"normal\";\n" +
+            "            }\n" +
+            "            t1.style.color = f2.r1[opcion].value;\n" +
+            "            t1.style.background = f2.r2[opcion2].value;\n" +
+            "         }\n" +
+            "      </script> \n" +
+            "   </head>\n" +
+            "   <body>\n" +
+            "      <div style=\"position:absolute;left:300;top:50;\">\n" +
+            "         <form name=\"f2\" style=\"width:380; background-color:#ffff99;\">\n" +
+            "            <center>\n" +
+            "               <br> \n" +
+            "               <p id=\"t1\" style=\"font:plain;\"> Texto </p>\n" +
+            "               <br>\n" +
+            "               <br> \n" +
+            "               <fieldset style=\"width:300;\">\n" +
+            "                  <legend> &nbsp; &nbsp; Estilo De Letra &nbsp; &nbsp; </legend>\n" +
+            "                  &nbsp; &nbsp; <input type=\"checkbox\" name=\"ch1\"> Negrita </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"checkbox\" name=\"ch2\"> Cursiva </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"checkbox\" name=\"ch3\"> Subrayado </input>\n" +
+            "               </fieldset>\n" +
+            "               <br>\n" +
+            "               <br> \n" +
+            "               <fieldset style=\"width:300;\">\n" +
+            "                  <legend> &nbsp; &nbsp; Color De Letra &nbsp; &nbsp; </legend>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"black\" checked> Negro </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"blue\"> Azul </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"red\"> Rojo </input>\n" +
+            "                  <br> &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"white\"> Blanco </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"green\"> Verde </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"yellow\"> Amarillo </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"purple\"> Morado </input>\n" +
+            "                  &nbsp; &nbsp; <input type=\"radio\" name=\"r1\" value=\"cyan\"> Cyan </input>\n" +
+            "               </fieldset>\n" +
+            "               <br>\n" +
+            "               <br> \n" +
+            "               <fieldset style=\"width:300;\">\n" +
+            "                  <legend> &nbsp; &nbsp; Color De Fondo &nbsp; &nbsp; </legend>\n" +
+            "                  <br> <input type=\"radio\" name=\"r2\" value=\"white\" checked> Blanco </input>\n" +
+            "                  <input type=\"radio\" name=\"r2\" value=\"black\"> Negro </input>\n" +
+            "                  <input type=\"radio\" name=\"r2\" value=\"pink\"> Rosa </input>\n" +
+            "                  <input type=\"radio\" name=\"r2\" value=\"purple\"> Morado </input>\n" +
+            "                  <input type=\"radio\" name=\"r2\" value=\"cyan\"> Cyan </input>\n" +
+            "               </fieldset>\n" +
+            "               <br> <br> <input type=\"button\" value=\"Aceptar\" onclick=\"verificar();\"> </input>\n" +
+            "            </center>\n" +
+            "         </form>\n" +
+            "      </div>\n" +
+            "   </body>\n" +
+            "</html>";
+
+
     String pagina1_1encoded = Base64.encodeToString(pagina1_1.getBytes(), Base64.NO_PADDING);
     String pagina1_2encoded = Base64.encodeToString(pagina1_2.getBytes(), Base64.NO_PADDING);
     String pagina1_3encoded = Base64.encodeToString(pagina1_3.getBytes(), Base64.NO_PADDING);
@@ -375,4 +490,6 @@ public class MainActivity extends AppCompatActivity {
     String pagina2_1encoded = Base64.encodeToString(pagina2_1.getBytes(), Base64.NO_PADDING);
     String pagina2_2encoded = Base64.encodeToString(pagina2_2.getBytes(), Base64.NO_PADDING);
     String pagina2_3encoded = Base64.encodeToString(pagina2_3.getBytes(), Base64.NO_PADDING);
+    String pagina4_1encoded = Base64.encodeToString(pagina4_1.getBytes(), Base64.NO_PADDING);
+    String pagina4_2encoded = Base64.encodeToString(pagina4_2.getBytes(), Base64.NO_PADDING);
 }

@@ -42,4 +42,16 @@
                 android:title="Pagina 3: Formulario"/>
         </menu>
     </item>
+    <item
+        android:id="@+id/parte4"
+        android:title="Practica 9: Parte 4">
+        <menu>
+            <item
+                android:id="@+id/p4_1"
+                android:title="Pagina 1: Option select"/>
+            <item
+                android:id="@+id/p4_2"
+                android:title="Pagina 2: Radio option"/>
+        </menu>
+    </item>
 </menu>
