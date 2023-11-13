@@ -2,6 +2,7 @@ package com.itca.practica9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
@@ -80,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
             browser.loadData(pagina4_1encoded, "text/html", "base64");
         else if (id == R.id.p4_2)
             browser.loadData(pagina4_2encoded, "text/html", "base64");
-        else
+        else if (id == R.id.animaciones){
+            Intent a = new Intent(this, animation.class);
+            startActivity(a);
+        }else
             return super.onOptionsItemSelected(item);
         return true;
     }
